@@ -13,6 +13,8 @@
     <link href="manifest.json" rel="manifest" />
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
+    <link href="Generic-IoT-PWA.styles.css" rel="stylesheet">
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" integrity="if_needed" />
 </head>
 
 <body>
@@ -31,6 +33,9 @@
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
     <script>navigator.serviceWorker.register('service-worker.js');</script>
+    <script src="_content/BlazorStrap/popper.min.js"></script>
+    <script src="_content/BlazorStrap/blazorstrap.js"></script>
+    <script src="_content/Blazor.Bluetooth/JSInterop.js"></script>
 </body>
 
 </html>
