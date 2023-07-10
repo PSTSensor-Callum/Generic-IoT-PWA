@@ -1,9 +1,8 @@
-﻿using Generic_IoT_PWA.Models.Abstracts.Entities;
-using Generic_IoT_PWA.Models.Interfaces;
+﻿using Generic_IoT_PWA.Models.Abstracts.Dtos;
 
-namespace Generic_IoT_PWA.Models
+namespace Generic_IoT_PWA.Models.GenericSensor
 {
-    public class GenericSensor : Entity, IAccelerometer, IDistance, IElectrochemical, IHumidity, ITemperature
+    public class GenericSensorCreateDto : CreateDto
     {
         public int Temperature { get; set; }
         public int Humidity { get; set; }
@@ -15,7 +14,9 @@ namespace Generic_IoT_PWA.Models
         public double Y { get; set; }
         public double Z { get; set; }
 
-        public GenericSensor(int temperature, int humidity, double distance, string electrochemicalName, string electrochemicalDescription, int electrochemicalReading, double x, double y, double z)
+        public GenericSensorCreateDto() { }
+
+        public GenericSensorCreateDto(int temperature, int humidity, double distance, string electrochemicalName, string electrochemicalDescription, int electrochemicalReading, double x, double y, double z)
         {
             Temperature = temperature;
             Humidity = humidity;

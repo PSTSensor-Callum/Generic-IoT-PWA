@@ -1,4 +1,4 @@
-﻿using Generic_IoT_PWA.Models;
+﻿using Generic_IoT_PWA.Models.GenericSensor;
 using Microsoft.EntityFrameworkCore;
 
 namespace Generic_IoT_PWA.Data
