@@ -21,7 +21,15 @@ builder.Services.AddBlazorStrap();
 
 builder.Services.AddBluetoothNavigator();
 
-builder.Services.AddDbContext<PWADbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer")));
+builder.Services.AddDbContext<PWADbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer")));
+//Uncomment when live/making changes
+//InitialiseDb(builder.Services);
+
+static void InitialiseDb(IServiceCollection services)
+{
+    PWADbContext? context = services.BuildServiceProvider().GetService<PWADbContext>();
+    context?.Database.Migrate();
+    context?.SaveChanges();
+}
 
 await builder.Build().RunAsync();
