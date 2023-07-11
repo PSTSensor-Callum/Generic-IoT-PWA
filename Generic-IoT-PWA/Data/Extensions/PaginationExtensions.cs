@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Http;
 using System.Text.RegularExpressions;
 using Generic_IoT_PWA.Models;
+using Generic_IoT_PWA.Models.Interfaces;
+using Generic_IoT_PWA.Models.Abstracts.Dtos;
 
 namespace Generic_IoT_PWA.Data.Extensions
 {
