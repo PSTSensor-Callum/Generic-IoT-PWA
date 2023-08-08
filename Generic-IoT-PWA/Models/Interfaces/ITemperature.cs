@@ -2,6 +2,7 @@
 {
     public interface ITemperature
     {
-        public int Temperature { get; set; }
+        public Dictionary<DateTime, double>? Measurements { get; set; }
+        public double Sum { get; set; }
     }
 }

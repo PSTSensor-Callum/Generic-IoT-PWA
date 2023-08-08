@@ -11,6 +11,8 @@ using System.Data.SqlClient;
 using Generic_IoT_PWA.Data;
 using Microsoft.EntityFrameworkCore;
 using Generic_IoT_PWA.Settings;
+using Generic_IoT_PWA.Services.Database;
+using Generic_IoT_PWA.Services;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -25,19 +27,13 @@ builder.Services.AddBlazorStrap();
 
 builder.Services.AddBluetoothNavigator();
 
-builder.Services.AddDbContext<PWADbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer")));
-//Uncomment when live/making changes
-//InitialiseDb(builder.Services);
 
 // Adding Pagination Services
 builder.Services.Configure<PaginationSettings>(configuration.GetSection(nameof(PaginationSettings)));
 builder.Services.AddSingleton<IPaginationSettings>(sp => sp.GetRequiredService<IOptions<PaginationSettings>>().Value);
 
-static void InitialiseDb(IServiceCollection services)
-{
-    PWADbContext? context = services.BuildServiceProvider().GetService<PWADbContext>();
-    context?.Database.Migrate();
-    context?.SaveChanges();
-}
+//Adding MongoDb Database
+builder.Services.AddSingleton<IDataServiceSettings>(x => x.GetRequiredService<IOptions<DataServiceSettings>>().Value);
+builder.Services.AddSingleton<IDataService, DataService>();
 
 await builder.Build().RunAsync();
