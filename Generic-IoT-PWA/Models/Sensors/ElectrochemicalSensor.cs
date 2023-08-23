@@ -11,9 +11,11 @@ namespace Generic_IoT_PWA.Models.Sensors
         [BsonRequired]
         public Guid DeviceId { get; set; }
         [BsonElement("start_date")]
+        [BsonRequired]
         [BsonRepresentation(BsonType.DateTime)]
         public DateTime StartDate { get; set; }
         [BsonElement("end_date")]
+        [BsonRequired]
         [BsonRepresentation(BsonType.DateTime)]
         public DateTime EndDate { get; set; }
         [BsonElement("measurements")]

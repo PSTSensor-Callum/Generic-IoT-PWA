@@ -6,6 +6,7 @@
         string DatabaseName { get; set; }
         string DeviceCollectionName { get; set; }
         string TemperatureCollectionName { get; set; }
+        string ElectrochemicalCollectionName { get; set; }
 
     }
 }

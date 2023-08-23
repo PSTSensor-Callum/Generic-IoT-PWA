@@ -8,5 +8,6 @@ namespace Generic_IoT_PWA.Services
         public string DatabaseName { get; set; }
         public string DeviceCollectionName { get; set; }
         public string TemperatureCollectionName { get; set; }
+        public string ElectrochemicalCollectionName { get; set; }
     }
 }

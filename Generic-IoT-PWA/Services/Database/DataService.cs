@@ -9,6 +9,7 @@ namespace Generic_IoT_PWA.Services.Database
     {
         private readonly IMongoCollection<Device> _devices;
         private readonly IMongoCollection<TemperatureSensor> _temperatureSensors;
+        private readonly IMongoCollection<ElectrochemicalSensor> _electrochemicalSensors;
 
         public DataService(IDataServiceSettings settings)
         {
@@ -17,6 +18,7 @@ namespace Generic_IoT_PWA.Services.Database
 
             _devices = database.GetCollection<Device>(settings.DeviceCollectionName);
             _temperatureSensors = database.GetCollection<TemperatureSensor>(settings.TemperatureCollectionName);
+            _electrochemicalSensors = database.GetCollection<ElectrochemicalSensor>(settings.ElectrochemicalCollectionName);
         }
 
 
@@ -37,6 +39,12 @@ namespace Generic_IoT_PWA.Services.Database
         public async Task<TemperatureSensor> GetTemperatureSensorAsync(Guid id) => await (await _temperatureSensors.FindAsync(x => x.Id == id)).FirstOrDefaultAsync();
         public async Task<List<TemperatureSensor>> GetTemperatureSensorsAsync(List<Guid> ids) => await (await _temperatureSensors.FindAsync(Builders<TemperatureSensor>.Filter.In(x => x.Id, ids))).ToListAsync();
         public async Task CreateTemperatureSensorAsync(TemperatureSensor temperatureSensor) => await _temperatureSensors.InsertOneAsync(temperatureSensor);
-        public async Task ReplaceTemperatureSensorAsync(TemperatureSensor temperatureSensor) => await _temperatureSensors.FindOneAndReplaceAsync(x => x.Id == temperatureSensor.Id, temperatureSensor)
+        public async Task ReplaceTemperatureSensorAsync(TemperatureSensor temperatureSensor) => await _temperatureSensors.FindOneAndReplaceAsync(x => x.Id == temperatureSensor.Id, temperatureSensor);
+
+        //Electrochemical sensors
+        public async Task<List<ElectrochemicalSensor>> GetAllElectrochemicalSensorsAsync(bool includeInactive = false) =>
+            includeInactive ? await (await _electrochemicalSensors.FindAsync(x => true)).ToListAsync()
+                            : await (await _electrochemicalSensors.FindAsync(x => x.Active)).ToListAsync();
+       
     }
 }
